@@ -9,6 +9,9 @@ This project is a visually engaging, dynamic web homepage designed to showcase t
 * **Immersive Visuals**: A full-screen background banner that creates an engaging, atmospheric experience.
 * **Strategic Messaging**: Highlights deep experience in fieldwork, strategy, and consumer behavior.
 
+This serves both as a portfolio homepage and a testbed to evaluate frontend skills in a simple, creative environment.
+
+
 ##  Run Guide
 
 1. Ensure you have **Node.js v18+** installed.
