@@ -3,6 +3,7 @@ const path = require('path');
 const bodyParser = require('body-parser');
 const cookieParser = require('cookie-parser');
 const fileUpload = require('express-fileupload');
+const cors = require('cors');
 
 const app = express();
 
@@ -10,6 +11,9 @@ const app = express();
 if (process.env.NODE_ENV !== 'production') {
     require('dotenv').config({ path: 'backend/config/config.env' });
 }
+
+// Enable CORS for all routes
+app.use(cors());
 
 app.use(express.json());
 app.use(cookieParser());
