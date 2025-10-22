@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Test People Transform API</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: 50px auto;
+            padding: 20px;
+            background-color: #f5f5f5;
+        }
+        .container {
+            background: white;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        h1 {
+            color: #333;
+            margin-bottom: 20px;
+        }
+        button {
+            background-color: #4CAF50;
+            color: white;
+            padding: 12px 24px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+        button:hover {
+            background-color: #45a049;
+        }
+        pre {
+            background-color: #f4f4f4;
+            padding: 15px;
+            border-radius: 4px;
+            overflow-x: auto;
+            border: 1px solid #ddd;
+        }
+        .section {
+            margin: 20px 0;
+        }
+        .label {
+            font-weight: bold;
+            color: #555;
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>People Transform API Test</h1>
+
+        <div class="section">
+            <div class="label">Input Data:</div>
+            <pre id="inputData"></pre>
+        </div>
+
+        <button onclick="testAPI()">Transform People List</button>
+
+        <div class="section">
+            <div class="label">Response:</div>
+            <pre id="response">Click the button to test the API...</pre>
+        </div>
+    </div>
+
+    <script>
+        // Sample input data
+        const sampleData = [
+            { "no": 1, "name": "Alden", "age": 24, "birthday": "1999.12.12" },
+            { "no": 2, "name": "Briony", "age": 32, "birthday": "1990.05.10" },
+            { "no": 3, "name": "Cedric", "age": 28, "birthday": "1995.08.20" }
+        ];
+
+        // Display input data
+        document.getElementById('inputData').textContent = JSON.stringify(sampleData, null, 2);
+
+        async function testAPI() {
+            const responseElement = document.getElementById('response');
+            responseElement.textContent = 'Loading...';
+
+            try {
+                const response = await fetch('http://localhost:4003/api/v1/people/transform', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify(sampleData)
+                });
+
+                const data = await response.json();
+
+                // Log to console as well
+                console.log('API Response:', data);
+
+                // Display formatted response
+                responseElement.textContent = JSON.stringify(data, null, 2);
+            } catch (error) {
+                console.error('Error:', error);
+                responseElement.textContent = 'Error: ' + error.message;
+            }
+        }
+    </script>
+</body>
+</html>
